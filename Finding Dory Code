@@ -1,0 +1,76 @@
+let upKey = 38;
+let downKey = 40;
+let rightKey = 39;
+let leftKey = 37;
+let drawDory = false;
+ 
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+    background(255);
+    frameRate(100)
+    text("Kieran Deeley", windowWidth - 80, windowHeight - 10) // This displays my name in the bottom right hand corner of the opening page.
+    rectMode(CENTER);
+    stroke(0, 50, 255);
+    strokeWeight(18);
+    fill(176, 224, 230);
+    rect(windowWidth / 2, windowHeight / 2, 600, 200);
+    stroke(176, 224, 230);
+    fill(0);
+    textAlign(CENTER);
+    textSize(30);
+    text("Click Here to Play Finding Dory!", windowWidth / 2, windowHeight / 2);
+    doryX = int(random(windowWidth));
+    doryY = int(random(windowHeight));
+}
+ 
+function draw() {
+    if (drawDory) {
+      background(39, 71, 144); // The following code within this scope tells the computer how to assemble Dory
+			stroke(0);
+			fill(176, 224, 230);
+			strokeWeight(3);
+      triangle(doryX, doryY, doryX - 60, doryY - 30, doryX - 60, doryY + 30);
+      ellipseMode(CENTER);
+      fill(176, 224, 230);
+			strokeWeight(3);
+      ellipse(doryX, doryY, 80, 60);
+			stroke(0);
+			strokeWeight(2);
+			fill(255, 255, 0);
+      triangle(doryX, doryY + 40, doryX - 10, doryY + 10, doryX + 10, doryY + 10);
+			ellipseMode(CENTER);
+			fill(0);
+			stroke(255);
+			strokeWeight(3);
+			ellipse(doryX + 20, doryY - 5, 15, 15);
+    }
+    if (keyIsPressed) { // In summary, this tells the computer to move Dory up, down, and sideways depending on whether each arrow key is continuously being pressed down.
+        if (keyCode == upKey) {
+          doryY -= 10;
+        } else if (keyCode == downKey) {
+           doryY += 10;
+        } else if (keyCode == rightKey) {
+           doryX +=10;
+        } else if (keyCode == leftKey) {
+           doryX -= 10;
+      //  } else if (keyCode == upKey && rightKey) {   The diagonals didn't work in the end, but I am restricted for time. I think it won't work because the functions are looking for only one keyCode at a time
+			//		doryX += 10;
+			//		doryY -= 10;
+			//	} else if (keyCode == upKey && leftKey) {
+			//		doryX -= 10;
+			//		doryY -= 10;
+			//	} else if (keyCode == downKey && rightKey) {
+			//		doryX += 10;
+			//		doryY += 10;
+			//	} else if (keyCode == downKey && leftKey) {
+			//		doryX -= 10;
+			//		doryY += 10;
+				}
+    }
+}
+ 
+function mousePressed() { // This code tells the computer that the 'Click to Play Finding Dory' has to be clicked to enter the game
+    if (mouseX >= windowWidth / 2 - 300 && mouseX <= windowWidth / 2 + 300 && mouseY >= windowHeight / 2 - 100 && mouseY <= windowHeight / 2 + 100) {
+        drawDory = true;
+    }
+}
